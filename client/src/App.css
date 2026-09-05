@@ -1,0 +1,944 @@
+/* --- Imports --- */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap');
+
+/* --- Variables --- */
+:root {
+  --brand-red: #D32F2F;
+  --brand-black: #1a1a1a;
+  --brand-white: #ffffff;
+  --bg-light: #f5f5f5;
+  --text-dark: #000;
+  --border-color: #ddd;
+}
+
+.app-container.dark {
+  --bg-light: #121212;
+  --text-dark: #e0e0e0;
+  --brand-white: #1e1e1e;
+  --border-color: #333;
+}
+
+/* --- Layout: Sidebar + Main --- */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  
+  /* --- Animated Background --- */
+  background: linear-gradient(-45deg, #f3f4f6, #e5e7eb, #d1d5db, #f9fafb);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+/* Dark Mode Animation Override */
+.app-container.dark body {
+  background: linear-gradient(-45deg, #000000, #1a1a1a, #4a0404, #2c0b0e);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --- Sidebar Styling --- */
+.sidebar {
+  width: 260px;
+  background-color: var(--brand-black);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  border-right: 4px solid var(--brand-red);
+  position: sticky;
+  top: 0;
+  height: 150vh;
+  z-index: 1000;
+  /* Glass effect for sidebar */
+  background: rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.sidebar-header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+}
+
+.sidebar-logo {
+  /* Purana font wala code hata do, ye naya daalo */
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-red { color: var(--brand-red); }
+.logo-white { color: white; }
+
+.theme-toggle-sidebar {
+  background: none;
+  border: 1px solid #555;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.sidebar-date {
+  padding: 15px 20px;
+  font-size: 12px;
+  color: #999;
+  border-bottom: 1px solid #333;
+}
+
+.sidebar-nav {
+  flex-grow: 1;
+  padding: 20px 0;
+}
+
+.nav-item {
+  display: block;
+  padding: 12px 20px;
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transition: 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.nav-item:hover, .nav-item.active {
+  background-color: #222;
+  color: var(--brand-red);
+  border-left: 3px solid var(--brand-red);
+}
+
+.sidebar-footer {
+  padding: 20px;
+}
+
+.subscribe-btn {
+  width: 100%;
+  background-color: var(--brand-red);
+  color: white;
+  border: none;
+  padding: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.login-link-sidebar, .admin-link-sidebar {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 13px;
+}
+.login-link-sidebar:hover { color: white; }
+
+/* --- Main Content Area --- */
+.main-content {
+  flex-grow: 1;
+  padding: 0;
+  /* Transparent so bg shows through */
+  background-color: transparent; 
+  position: relative; /* YEH LINE ADD KAREIN */
+  z-index: 1; /* YEH LINE ADD KAREIN */
+}
+
+/* --- Top Bar (Inside Main) --- */
+.top-bar {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.app-container.dark .top-bar {
+  background: rgba(20, 20, 20, 0.8);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.breadcrumb { font-size: 14px; color: #666; }
+
+/* --- Hero Section (News Portal Style) --- */
+.hero-section {
+  padding: 20px 40px;
+  /* Make section transparent */
+  background: transparent; 
+}
+
+.hero-wrapper {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Dark Mode Glass */
+.app-container.dark .hero-wrapper {
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hero-main {
+  flex: 2;
+}
+
+.hero-img-container {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.hero-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.hero-wrapper:hover .hero-img-container img {
+  transform: scale(1.05);
+}
+
+.hero-overlay-text {
+  padding-top: 15px;
+}
+
+.hero-cat {
+  color: var(--brand-red);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.hero-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 36px;
+  margin: 10px 0;
+  line-height: 1.1;
+  color: var(--text-dark);
+  /* Text Gradient */
+  background: -webkit-linear-gradient(45deg, #D32F2F, #333);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.app-container.dark .hero-title {
+  background: -webkit-linear-gradient(45deg, #ff5252, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-summary {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* --- Compact List (The "India Today" List Style) --- */
+.compact-list {
+  padding: 0 40px;
+  margin-top: 30px;
+}
+
+.compact-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  
+  /* Glassmorphism */
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.compact-item:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border-left: 5px solid var(--brand-red);
+}
+
+.app-container.dark .compact-item {
+  background: rgba(50, 50, 50, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.app-container.dark .compact-item:hover {
+  background: rgba(70, 70, 70, 0.9);
+  box-shadow: 0 10px 20px rgba(211, 47, 47, 0.2); /* Red Glow */
+}
+
+.compact-img {
+  width: 180px;
+  height: 120px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.compact-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.compact-item:hover .compact-img img {
+  transform: scale(1.1);
+}
+
+.compact-details h4 {
+  margin: 0 0 8px 0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--text-dark);
+}
+
+.compact-details p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-layout { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; position: relative; }
+  .hero-wrapper { flex-direction: column; }
+  .hero-img-container { height: 250px; }
+  .compact-item { flex-direction: column; }
+  .compact-img { width: 100%; height: 200px; }
+}
+/* =========================================
+   ADMIN DASHBOARD STYLING
+   ========================================= */
+
+.admin-dashboard-container {
+  padding: 30px;
+  min-height: 100vh;
+}
+
+.admin-dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-dash-header h1 {
+  margin: 0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 28px;
+  color: var(--text-dark);
+}
+
+.admin-dash-date {
+  font-size: 14px;
+  color: #666;
+  background: var(--brand-white);
+  padding: 8px 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Tabs */
+.admin-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.admin-tab-btn {
+  background: transparent;
+  border: none;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  transition: 0.3s;
+}
+
+.admin-tab-btn:hover {
+  background: rgba(211, 47, 47, 0.05);
+  color: var(--brand-red);
+}
+
+.admin-tab-btn.active {
+  background: var(--brand-red);
+  color: white;
+  box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+}
+
+/* Cards */
+.admin-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.app-container.dark .admin-card {
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.admin-card-title {
+  margin-top: 0;
+  font-family: 'Oswald', sans-serif;
+  color: var(--text-dark);
+  border-bottom: 2px solid var(--brand-red);
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+/* Modern Form */
+.modern-form .form-group {
+  margin-bottom: 20px;
+}
+
+.modern-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #444;
+}
+
+.modern-form input, 
+.modern-form select, 
+.modern-form textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: 0.3s;
+  box-sizing: border-box;
+  background: var(--brand-white);
+  color: var(--text-dark);
+}
+
+.modern-form input:focus, 
+.modern-form select:focus, 
+.modern-form textarea:focus {
+  outline: none;
+  border-color: var(--brand-red);
+  box-shadow: 0 0 0 4px rgba(211, 47, 47, 0.1);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.btn-publish {
+  background: var(--brand-red);
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-publish:hover {
+  background: #b71c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
+}
+
+.btn-cancel {
+  background: #eee;
+  color: #333;
+  border: none;
+  padding: 14px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Table Styling */
+.admin-table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.admin-table th, .admin-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.admin-table th {
+  background: #f9f9f9;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.admin-table tr:hover {
+  background: rgba(211, 47, 47, 0.03);
+}
+
+.cat-badge {
+  background: #e3f2fd;
+  color: #1565c0;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  margin-right: 5px;
+  transition: 0.2s;
+}
+
+.action-btn.edit { background: #fff3e0; color: #ef6c00; }
+.action-btn.edit:hover { background: #ef6c00; color: white; }
+
+.action-btn.delete { background: #ffebee; color: #c62828; }
+.action-btn.delete:hover { background: #c62828; color: white; }
+
+/* Responsive Admin */
+@media (max-width: 768px) {
+  .admin-tabs { flex-direction: column; }
+  .form-row { grid-template-columns: 1fr; }
+  .admin-table th, .admin-table td { padding: 10px; font-size: 12px; }
+}
+.btn-logout-admin {
+  background: transparent;
+  color: var(--brand-red);
+  border: 2px solid var(--brand-red);
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.btn-logout-admin:hover {
+  background: var(--brand-red);
+  color: white;
+}
+/* =========================================
+   HOME PAGE LAYOUT (LARGE CARDS + SIDEBAR)
+   ========================================= */
+.home-grid-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 2 parts Bade Cards, 1 part Sidebar */
+  gap: 30px;
+  padding: 20px 40px;
+}
+
+.large-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.large-news-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.large-news-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.large-card-img {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.large-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.large-news-card:hover .large-card-img img {
+  transform: scale(1.1);
+}
+
+.large-card-content {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.large-card-content h3 {
+  margin: 0 0 10px 0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--text-dark);
+}
+
+.large-card-content p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+
+/* =========================================
+   3D ANIMATED CUBE STYLES
+   ========================================= */
+.sidebar-3d-widgets {
+  position: sticky;
+  top: 80px; /* Top bar ke neeche stick karega */
+  height: fit-content;
+}
+
+.widget-3d-card {
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--border-color);
+}
+
+.widget-3d-title {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--brand-red);
+}
+
+/* The Cube Container */
+.cube-container {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 20px auto;
+  perspective: 800px;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  /* Thoda tilted rotation */
+  animation: rotateCube 12s infinite linear;
+}
+
+@keyframes rotateCube {
+  0%   { transform: rotateX(-20deg) rotateY(0deg); }
+  100% { transform: rotateX(-20deg) rotateY(360deg); }
+}
+
+/* Faces of the Cube */
+.face {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  border: 2px solid rgba(255,255,255,0.2);
+  box-sizing: border-box;
+  padding: 15px;
+  backface-visibility: visible; /* So we see all sides */
+}
+
+/* Cricket Cube Colors */
+.cricket-face { background: linear-gradient(135deg, #1a1a1a 0%, #434343 100%); }
+.face.front  { transform: rotateY(  0deg) translateZ(90px); }
+.face.back   { transform: rotateY(180deg) translateZ(90px); }
+.face.right  { transform: rotateY( 90deg) translateZ(90px); }
+.face.left   { transform: rotateY(-90deg) translateZ(90px); }
+.face.top    { transform: rotateX( 90deg) translateZ(90px); }
+.face.bottom { transform: rotateX(-90deg) translateZ(90px); }
+
+/* Weather Cube Colors */
+.weather-face { background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%); }
+
+.cube-score { font-size: 28px; font-weight: bold; color: var(--brand-red); }
+.cube-team { font-size: 14px; opacity: 0.8; margin-top: 5px; }
+.cube-temp { font-size: 36px; font-weight: bold; }
+.cube-desc { font-size: 14px; margin-top: 5px; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .home-grid-layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar-3d-widgets {
+    position: static;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  .widget-3d-card { width: 45%; }
+}
+/* =========================================
+   PREMIUM FLOATING BLOBS + BUBBLES
+   ========================================= */
+
+.animated-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* --- 1. BACKGROUND BLOBS (Color Wash) --- */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(60px);
+  animation: blobFloat 20s ease-in-out infinite;
+}
+
+.blob:nth-child(1) {
+  background: var(--brand-red); /* Red */
+  top: -50px; left: -50px;
+  width: 400px; height: 400px;
+}
+.blob:nth-child(2) {
+  background: #1976D2; /* Blue */
+  top: 40%; right: -100px;
+  width: 500px; height: 500px;
+  animation-delay: 5s;
+}
+.blob:nth-child(3) {
+  background: #FF9800; /* Orange/Saffron */
+  bottom: -100px; left: 30%;
+  width: 350px; height: 350px;
+  animation-delay: 10s;
+}
+
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
+  25% { transform: translate(80px, -50px) scale(1.2) rotate(90deg); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { transform: translate(-50px, 50px) scale(0.9) rotate(180deg); border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
+  75% { transform: translate(50px, 80px) scale(1.1) rotate(270deg); border-radius: 60% 30% 60% 40% / 70% 40% 50% 60%; }
+}
+
+
+/* --- 2. FLOATING BUBBLES (Upte hue bubbles) --- */
+.bubble {
+  position: absolute;
+  bottom: -150px; /* Neeche se shuru hoga */
+  left: var(--left); /* Home.jsx se position lega */
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  
+  /* Bubble jaisa shine dene ke liye gradient */
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
+  box-shadow: inset -10px -10px 30px rgba(0,0,0,0.05); /* Andar ka shadow */
+  
+  /* Animation variables */
+  animation: floatBubble var(--duration) var(--delay) infinite ease-in;
+  z-index: 1; /* Blobs ke upar dikhenge */
+}
+
+/* Dark mode ke liye bubbles ko thoda color de denge */
+.app-container.dark .bubble {
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+}
+
+/* Bubble ko neeche se upar le jaane ka animation */
+@keyframes floatBubble {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.5); /* Chhota shuru */
+    opacity: 0; /* Gayab */
+  }
+  10% {
+    opacity: 0.6; /* Dikhne lage */
+  }
+  50% {
+    transform: translateY(-60vh) translateX(30px) scale(1); /* Aadha raasta tay kar chuka, thoda right side jaye */
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-120vh) translateX(-20px) scale(0.8); /* Screen se bahar nikal jaye */
+    opacity: 0; /* Phir se gayab */
+  }
+}
+
+/* Dark mode mein blobs ko bhi thoda halka karo */
+.app-container.dark .blob {
+  opacity: 0.15;
+}
+/* Ensure News Cards Cubes ke upar rahe (Z-index) */
+.home-grid-layout {
+  position: relative;
+  z-index: 1; 
+}
+/* =========================================
+   PREMIUM ANIMATIONS & EFFECTS
+   ========================================= */
+
+/* 1. Card Entry Animation (Invisible initially) */
+.large-news-card {
+  opacity: 0;
+  transform: translateY(40px); /* Neeche se start karega */
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); /* Smooth bounce effect */
+}
+
+/* 2. When Card becomes visible (Triggered by JS) */
+.large-news-card.card-visible {
+  opacity: 1;
+  transform: translateY(0); /* Apni jagah aayega */
+}
+
+/* 3. 3D Hover Effect */
+.large-news-card:hover {
+  transform: translateY(-10px) perspective(1000px) rotateX(2deg) rotateY(-2deg) !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* 4. Image Shimmer Effect (Loading placeholder) */
+.large-card-img {
+  position: relative;
+  background-color: var(--border-color); /* Image se pehle grey bg */
+  overflow: hidden;
+}
+
+.shimmer-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmerMove 1.5s infinite; /* Light ko hilata rahega */
+}
+
+/* Dark mode ke liye shimmer color */
+.app-container.dark .shimmer-bg {
+  background: linear-gradient(90deg, #222 25%, #333 50%, #222 75%);
+  background-size: 200% 100%;
+}
+
+@keyframes shimmerMove {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Image fade in smoothly when loaded */
+.large-card-img img {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.large-card-img img.image-loaded {
+  opacity: 1;
+}
+
+/* 5. Category Tag Slide In */
+.large-card-content .hero-cat {
+  display: inline-block;
+  transform: translateX(-10px);
+  opacity: 0;
+  transition: all 0.4s ease 0.5s; /* Thoda late aayega */
+}
+
+.large-news-card.card-visible .hero-cat {
+  transform: translateX(0);
+  opacity: 1;
+}
