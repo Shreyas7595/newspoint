@@ -14,7 +14,14 @@ const app = express();
 
 // 2. MIDDLEWARE LAGAO (CORS & JSON)
 app.use(cors({
-    origin: 'http://localhost:5173', 
+    app.use(cors({
+origin: [
+'http://localhost:5173',
+'https://newspoint-theta.vercel.app'
+],
+methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+allowedHeaders: ['Content-Type', 'Authorization']
+}));
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     allowedHeaders: ['Content-Type'] 
 }));
